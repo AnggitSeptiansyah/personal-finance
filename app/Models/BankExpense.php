@@ -28,4 +28,9 @@ class BankExpense extends Model
     public function bankExpenseType(): BelongsTo {
         return $this->belongsTo(BankExpenseType::class);
     }
+
+    public function bankAccount(): BelongsTo
+    {
+        return $this->belongsTo(BankAccount::class);
+    }
 }

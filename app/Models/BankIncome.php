@@ -35,4 +35,9 @@ class BankIncome extends Model
     {
         return $this->belongsTo(BankIncomeType::class);
     }
+
+    public function bankAccount(): BelongsTo
+    {
+        return $this->belongsTo(BankAccount::class);
+    }
 }

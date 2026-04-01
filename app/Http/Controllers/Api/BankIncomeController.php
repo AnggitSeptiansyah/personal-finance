@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\BankAccount;
+use App\Models\BankIncome;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class BankIncomeController extends Controller
@@ -10,17 +13,18 @@ class BankIncomeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        //
-    }
+        $query = BankIncome::with(['bankAccount', 'bankIncomeType'])
+            ->where('user_id', $request->user()->id);
+        
+        if ($request->filled('bank_account_id')) {
+            $query->where('bank_account_id', $request->bank_account_id);
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $incomes = $query->orderBy('date', 'desc')->paginate(15);
+
+        return response()->json($incomes);
     }
 
     /**

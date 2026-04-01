@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\BankExpense;
 use App\Models\BankExpenseType;
 use App\Models\BankIncome;
 use App\Models\BankIncomeType;
