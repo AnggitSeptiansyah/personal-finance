@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bank_expenses', function (Blueprint $table) {
+        Schema::create('bank_accounts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('bank_account_id')->constrained()->onDelete('cascade');
-            $table->foreignId('bank_expense_type_id')->constrained()->onDelete('cascade');
-            $table->decimal('amount', 15, 2);
-            $table->text('note')->nullable();
-            $table->date('date');
+            $table->string('bank_name');
+            $table->string('account_name');
+            $table->string('account_number');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bank_expenses');
+        Schema::dropIfExists('bank_accounts');
     }
 };

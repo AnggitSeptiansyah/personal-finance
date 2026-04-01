@@ -15,9 +15,15 @@ class BankIncome extends Model
     protected $fillable = [
         'user_id',
         'bank_income_type_id',
+        'bank_account_id',
         'amount',
         'note',
         'date'
+    ];
+
+    protected $casts = [
+        'date' => 'date',
+        'amount' => 'decimal:2'
     ];
 
     public function user(): BelongsTo

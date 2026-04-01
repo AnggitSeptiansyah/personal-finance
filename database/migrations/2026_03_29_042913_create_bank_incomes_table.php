@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('bank_incomes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('bank_account_id')->constrained()->onDelete('cascade');
             $table->foreignId('bank_income_type_id')->constrained()->onDelete('cascade');
             $table->decimal('amount', 15, 2);
             $table->text('note')->nullable();
