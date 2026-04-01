@@ -9,35 +9,11 @@ use Illuminate\Auth\Access\Response;
 class CashIncomePolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, CashIncome $cashIncome): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        return false;
-    }
-
-    /**
      * Determine whether the user can update the model.
      */
     public function update(User $user, CashIncome $cashIncome): bool
     {
-        return false;
+        return $user->id == $cashIncome->user_id;
     }
 
     /**
@@ -45,22 +21,6 @@ class CashIncomePolicy
      */
     public function delete(User $user, CashIncome $cashIncome): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, CashIncome $cashIncome): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, CashIncome $cashIncome): bool
-    {
-        return false;
+        return $user->id == $cashIncome->user->id;
     }
 }
