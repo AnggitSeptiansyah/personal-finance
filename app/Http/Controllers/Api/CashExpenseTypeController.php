@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CashExpenseTypeRequest;
+use App\Models\CashExpenseType;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CashExpenseTypeController extends Controller
@@ -10,17 +13,11 @@ class CashExpenseTypeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $types = CashExpenseType::where('user_id', $request->user()->id)
+            ->orderBy('name')->get();
+        return response()->json(['data' => $types]);
     }
 
     /**
@@ -28,38 +25,40 @@ class CashExpenseTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $validated = $request->validated();
+        $type = CashExpenseType::create([
+            'user_id' => $request->user()->id,
+            ...$validated,
+        ]);
+        return response()->json([
+            'data' => $type,
+            'message' => 'Jenis pengeluaran cash berhasil ditambah', 201
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CashExpenseTypeRequest $request, CashExpenseType $cashExpenseType): JsonResponse
     {
-        //
+        $this->authorize('update', $cashExpenseType);
+        $cashExpenseType->update($request->validated());
+
+        return response()->json([
+            'data' => $cashExpenseType,
+            'message' => 'Jenis pengeluaran cash behasil diubah'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(CashExpenseType $cashExpenseType)
     {
-        //
+        $this->authorize('delete', $cashExpenseType);
+        $cashExpenseType->delete();
+        return response()->json([
+            'message' => 'Jenis pengeluaran cash berhasil dihapus'
+        ]);
     }
 }
