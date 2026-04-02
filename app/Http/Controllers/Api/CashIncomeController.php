@@ -36,8 +36,8 @@ class CashIncomeController extends Controller
 
         return response()->json([
             'data' => $income->load('cashIncomeType'),
-            'message' => 'Pemasukan cash berhasil ditambah', 201
-        ]);
+            'message' => 'Pemasukan cash berhasil ditambah',
+        ], 201);
     }
 
 
@@ -48,7 +48,11 @@ class CashIncomeController extends Controller
     {
         $this->authorize('update', $cashIncome);
         $validated = $request->validated();
+
+        $request->user()->cashIncomeTypes()->findOrFail($validated['cash_income_type_id']);
+
         $cashIncome->update($validated);
+        
         return response()->json([
             'data' => $cashIncome->load('cashIncomeType'),
             'message' => 'Pemasukan cash berhasil diubah'

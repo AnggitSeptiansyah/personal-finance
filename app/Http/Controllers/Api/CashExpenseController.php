@@ -35,7 +35,7 @@ class CashExpenseController extends Controller
         return response()->json([
             'data' => $expense->load('cashExpenseType'),
             'message' => 'Pengeluaran cash berhasil ditambahkan',
-        ]);
+        ], 201);
     }
 
 
@@ -45,7 +45,10 @@ class CashExpenseController extends Controller
     public function update(CashExpenseRequest $request, CashExpense $cashExpense)
     {
         $this->authorize('update', $cashExpense);
-        $cashExpense->update($request->validated());
+        $validated = $request->validated();
+
+        $request->user()->cashExpenseTypes()->findOrFail($validated['cash_expense_type_id']);
+        $cashExpense->update($validated);
 
         return response()->json([
             'data' => $cashExpense->load('cashIncomeType'),

@@ -35,7 +35,7 @@ class BankIncomeTypeController extends Controller
         return response()->json([
             'data' => $type,
             'message' => 'Jenis pemasukan bank berhasil ditambah'
-        ]);
+        ], 201);
     }
 
     /**

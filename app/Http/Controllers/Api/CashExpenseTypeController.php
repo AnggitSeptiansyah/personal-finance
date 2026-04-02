@@ -32,8 +32,8 @@ class CashExpenseTypeController extends Controller
         ]);
         return response()->json([
             'data' => $type,
-            'message' => 'Jenis pengeluaran cash berhasil ditambah', 201
-        ]);
+            'message' => 'Jenis pengeluaran cash berhasil ditambah',
+        ], 201);
     }
 
     /**

@@ -21,14 +21,6 @@ class CashIncomeTypeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(CashIncomeTypeRequest $request): JsonResponse
@@ -40,8 +32,8 @@ class CashIncomeTypeController extends Controller
         ]);
         return response()->json([
             'data' => $type, 
-            'message' => 'Jenis pemasukan cash berhasil ditambahkan', 201
-        ]);
+            'message' => 'Jenis pemasukan cash berhasil ditambahkan',
+        ], 201);
     }
 
 
