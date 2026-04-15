@@ -67,7 +67,7 @@ class BankAccountController extends Controller
 
         return response()->json([
             'message' => 'Akun bank berhasil dihapus'
-        ])
+        ]);
         
     }
 }

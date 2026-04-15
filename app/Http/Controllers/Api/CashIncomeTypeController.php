@@ -25,6 +25,9 @@ class CashIncomeTypeController extends Controller
      */
     public function store(CashIncomeTypeRequest $request): JsonResponse
     {
+        \Log::info('User:', ['user' => $request->user()]);  // tambah ini sementara
+        // ... kode selanjutnya
+
         $validated = $request->validated();
         $type = CashIncomeType::create([
             'user_id' => $request->user()->id,
@@ -61,6 +64,6 @@ class CashIncomeTypeController extends Controller
         $cashIncomeType->delete();
         return response()->json([
             'message' => 'Jenis pemasukan cash berhasil dihapus',
-        ])
+        ]);
     }
 }

@@ -48,6 +48,7 @@ class CashExpenseController extends Controller
         $validated = $request->validated();
 
         $request->user()->cashExpenseTypes()->findOrFail($validated['cash_expense_type_id']);
+        
         $cashExpense->update($validated);
 
         return response()->json([

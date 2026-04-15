@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cash/expenses', [PageController::class, 'cashExpenses'])->name('cash.expenses');
 
     // bank
+    Route::get('/bank/accounts', [PageController::class, 'bankAccounts'])->name('bank.accounts');
     Route::get('/bank/incomes-types', [PageController::class, 'bankIncomeTypes'])->name('bank.income-types');
     Route::get('/bank/incomes', [PageController::class, 'bankIncomes'])->name('bank.incomes');
     Route::get('/bank/expense-types', [PageController::class, 'bankExpenseTypes'])->name('bank.expense-types');

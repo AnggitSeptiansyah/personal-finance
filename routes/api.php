@@ -3,13 +3,18 @@
 use App\Http\Controllers\Api\BankAccountController;
 use App\Http\Controllers\Api\BankExpenseController;
 use App\Http\Controllers\Api\BankIncomeController;
+use App\Http\Controllers\Api\BankIncomeTypeController;
 use App\Http\Controllers\Api\CashExpenseController;
 use App\Http\Controllers\Api\CashExpenseTypeController;
 use App\Http\Controllers\Api\CashIncomeController;
 use App\Http\Controllers\Api\CashIncomeTypeController;
+use App\Http\Controllers\Api\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'web'])->group(function() {
+Route::middleware(['auth:sanctum'])->group(function() {
+    //dashboard
+    Route::get('/dashboard/summary', [DashboardController::class, 'summary']);
+
     // cash
     Route::apiResource('cash/income-types', CashIncomeTypeController::class)->parameters(['income-types' => 'cashIncomeType']);
     Route::apiResource('cash/incomes', CashIncomeController::class)->parameters(['incomes' => 'cashIncome']);

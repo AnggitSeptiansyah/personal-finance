@@ -20,6 +20,7 @@ class PageController extends Controller
     public function cashExpenses(): View { return view('cash.expenses.index'); }
 
     // Bank
+    public function bankAccounts(): View     { return view('bank.accounts.index'); }
     public function bankIncomeTypes(): View { return view('bank.income-types.index'); }
     public function bankIncomes(): View { return view('bank.incomes.index'); }
     public function bankExpenseTypes(): View { return view('bank.expense-types.index'); }
